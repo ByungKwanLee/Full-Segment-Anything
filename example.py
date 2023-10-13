@@ -296,7 +296,7 @@ from build_sam import sam_model_registry
 
 
 # img resolution
-img_resolution = 256
+img_resolution = 2048
 sam = sam_model_registry['vit_b'](checkpoint='ckpt/sam_vit_b_01ec64.pth', custom_img_size=img_resolution).cuda()
 
 # prompt
@@ -305,16 +305,15 @@ input_point = torch.as_tensor(build_all_layer_point_grids(16, 0, 1)[0] * img_res
 input_label = torch.tensor([1 for _ in range(input_point.shape[0])]).cuda()
 
 def prepare_image(image, img_resolution=img_resolution):
-    trans = torchvision.transforms.Compose([torchvision.transforms.CenterCrop(1024),
-                                            torchvision.transforms.Resize(img_resolution)])
+    trans = torchvision.transforms.Compose([torchvision.transforms.Resize((img_resolution, img_resolution))])
     image = torch.as_tensor(image).cuda()
     return trans(image.permute(2, 0, 1))
 
 # image upload
-img1 = np.array(Image.open("figure/paris.jpg"))
-img2 = np.array(Image.open("figure/paris2.jpg"))
-img3 = np.array(Image.open("figure/army.png"))
-img4 = np.array(Image.open("figure/army2.png"))
+img1 = np.array(Image.open("figure/sam1.png"))[...,:3]
+img2 = np.array(Image.open("figure/sam2.png"))[...,:3]
+img3 = np.array(Image.open("figure/sam3.png"))[...,:3]
+img4 = np.array(Image.open("figure/sam4.png"))[...,:3]
 img1_tensor = prepare_image(img1)
 img2_tensor = prepare_image(img2)
 img3_tensor = prepare_image(img3)
