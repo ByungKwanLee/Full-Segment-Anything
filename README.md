@@ -45,13 +45,13 @@ Figure 2. Full-Segment-Anything on Image Resolution *256*
 <img src="example_images/example2.png" width="1000" height="500">
 
 <figcaption>
-Figure 2. Full-Segment-Anything on Image Resolution *512*
+Figure 3. Full-Segment-Anything on Image Resolution *512*
 </figcaption>
 <img src="example_images/example3.png" width="1000" height="500">
 
 
 <figcaption>
-Figure 2. Full-Segment-Anything on Image Resolution *1024*
+Figure 4. Full-Segment-Anything on Image Resolution *1024*
 </figcaption>
 <img src="example_images/example4.png" width="1000" height="500">
 
