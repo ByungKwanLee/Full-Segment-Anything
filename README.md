@@ -63,6 +63,8 @@ In example.py, there is part of Example 6.
 
 You can consider this part and modify it to fit your individual purpose.
 
+If you want to the changed part in record, compared by origincal SAM code, you can search keyword of "by LBK EDIT" of which position represents the code-changed position in detail. 
+
 (Example 1-5 conduct trial and errors to investigate what the problems of oiriginal SAM code are.)
 
 ```python
