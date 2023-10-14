@@ -29,6 +29,8 @@ Therefore, Full-Segment-Anything addresses the above issues:
 
 * **Flexible input image size (***128, 256, 512, 1024, etc***)**
 
+(Not did we re-train, but we modified in the code-level)
+
 ---
 ## Visualization of Full-Segment-Anything
 
