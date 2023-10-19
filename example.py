@@ -296,7 +296,7 @@ from build_sam import sam_model_registry
 
 
 # img resolution
-img_resolution = 2048
+img_resolution = 1024
 sam = sam_model_registry['vit_b'](checkpoint='ckpt/sam_vit_b_01ec64.pth', custom_img_size=img_resolution).cuda()
 
 # prompt

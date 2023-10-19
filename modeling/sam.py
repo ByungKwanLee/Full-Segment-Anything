@@ -148,6 +148,7 @@ class Sam(nn.Module):
         self,
         batched_input: List[Dict[str, Any]],
         multimask_output: bool,
+        is_low_resol: bool = False,
     ) -> List[Dict[str, torch.Tensor]]:
         
         input_images = torch.stack([self.lbk_preprocess(x["image"]) for x in batched_input], dim=0)
@@ -173,13 +174,20 @@ class Sam(nn.Module):
           )
 
           # Progressing Intergraion.. by LBK
-          refined_masks = self.postprocess_small_regions(low_res_masks, iou_predictions, *input_images.shape[2:])
+          refined_masks = self.postprocess_small_regions(low_res_masks, iou_predictions, *input_images.shape[2:], is_low_resol)
+          if not is_low_resol:
+            refined_masks = F.interpolate(
+              refined_masks.unsqueeze(1).float(),
+              input_images.shape[2:],
+              mode="bilinear",
+              align_corners=False,
+            ).squeeze(1).bool()
           refined_mask_outputs.append(refined_masks)
-
+          
         return refined_mask_outputs
     
     # PostProcess by LBK EDIT
-    def postprocess_small_regions(self, masks, iou_predictions, orig_h, orig_w):
+    def postprocess_small_regions(self, masks, iou_predictions, orig_h, orig_w, is_low_resol):
 
 
       """
@@ -191,14 +199,16 @@ class Sam(nn.Module):
       box_nms_thresh = 0.7
 
 
-      # Interpolation 
-      masks = F.interpolate(
-          masks,
-          (orig_h, orig_w),
-          mode="bilinear",
-          align_corners=False,
-      )
-
+      # Interpolation
+      if not is_low_resol:
+        masks = F.interpolate(
+            masks,
+            (orig_h, orig_w),
+            mode="bilinear",
+            align_corners=False,
+        )
+      else:
+          orig_h, orig_w = masks.shape[2:]
 
       # Serialize predictions and store in MaskData
       data = MaskData(
