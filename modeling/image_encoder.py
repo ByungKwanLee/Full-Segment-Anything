@@ -184,6 +184,8 @@ class Block(nn.Module):
         x = self.norm1(x)
         # Window partition
         if self.window_size > 0:
+            orig_H, orig_W = x.shape[1], x.shape[2] # LBK
+            x = F.interpolate(x.permute(0,3,1,2), size=(64, 64), mode='bicubic').permute(0,2,3,1) # LBK
             H, W = x.shape[1], x.shape[2]
             x, pad_hw = window_partition(x, self.window_size)
 
@@ -191,6 +193,7 @@ class Block(nn.Module):
         # Reverse window partition
         if self.window_size > 0:
             x = window_unpartition(x, self.window_size, pad_hw, (H, W))
+            x = F.interpolate(x.permute(0,3,1,2), size=(orig_H, orig_W), mode='bicubic').permute(0,2,3,1) # LBK
 
         x = shortcut + x
         x = x + self.mlp(self.norm2(x))

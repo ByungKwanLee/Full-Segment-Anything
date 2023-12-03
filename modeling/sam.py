@@ -193,9 +193,9 @@ class Sam(nn.Module):
       """
       Configuration
       """
-      pred_iou_thresh = 0.7 #0.88
+      pred_iou_thresh = 0.85
       stability_score_offset = 1.0
-      stability_score_thresh = 0.7 #0.95
+      stability_score_thresh = 0.85
       box_nms_thresh = 0.7
 
 

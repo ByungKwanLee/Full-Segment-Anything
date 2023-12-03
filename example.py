@@ -45,23 +45,21 @@ prompt_to_mask.set_image(img)
 # prompt
 # input_point = np.array([[500, 375], [370, 1200]])
 # input_label = np.array([1, 1])
-input_point = np.array([[370, 1200]])
-input_label = np.array([1])
+# input_point = np.array([[370, 1200]])
+# input_label = np.array([1])
 
-input_box = None #np.array([200, 600, 500, 1400])
+input_box = np.array([200, 600, 500, 1400])
 
 # visualization
 plt.figure(figsize=(10,10))
 plt.imshow(img)
-# show_box(input_box, plt.gca(), plt)
-show_points(input_point, input_label, plt.gca())
+show_box(input_box, plt.gca(), plt)
+# show_points(input_point, input_label, plt.gca())
 plt.axis('on')
 plt.show()
 
 # sam prediction
 masks, scores, logits = prompt_to_mask.predict(
-    point_coords=input_point,
-    point_labels=input_label,
     box = input_box,
     multimask_output=True,
 )
@@ -72,8 +70,8 @@ for i, (mask, score) in enumerate(zip(masks, scores)):
     plt.figure(figsize=(10,10))
     plt.imshow(img)
     show_mask(mask, plt.gca())
-    # show_box(input_box, plt.gca(), plt)
-    show_points(input_point, input_label, plt.gca())
+    show_box(input_box, plt.gca(), plt)
+    # show_points(input_point, input_label, plt.gca())
     plt.title(f"Mask {i+1}, Score: {score:.3f}", fontsize=18)
     plt.axis('off')
     plt.show()
@@ -293,11 +291,11 @@ import matplotlib.pyplot as plt
 from utils.utils import show_mask, show_points, show_lbk_masks
 
 from build_sam import sam_model_registry
-
+import os; os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 # img resolution
 img_resolution = 1024
-sam = sam_model_registry['vit_b'](checkpoint='ckpt/sam_vit_b_01ec64.pth', custom_img_size=img_resolution).cuda()
+sam = sam_model_registry['vit_h'](checkpoint='ckpt/sam_vit_h_4b8939.pth', custom_img_size=img_resolution).cuda()
 
 # prompt
 from utils.amg import build_all_layer_point_grids
