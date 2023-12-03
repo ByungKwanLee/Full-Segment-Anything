@@ -81,11 +81,11 @@ import matplotlib.pyplot as plt
 from utils.utils import show_mask, show_points, show_lbk_masks
 
 from build_sam import sam_model_registry
-
+import os; os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 # img resolution
-img_resolution = 256
-sam = sam_model_registry['vit_b'](checkpoint='ckpt/sam_vit_b_01ec64.pth', custom_img_size=img_resolution).cuda()
+img_resolution = 1024
+sam = sam_model_registry['vit_h'](checkpoint='ckpt/sam_vit_h_4b8939.pth', custom_img_size=img_resolution).cuda()
 
 # prompt
 from utils.amg import build_all_layer_point_grids
