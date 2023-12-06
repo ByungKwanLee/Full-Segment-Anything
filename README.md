@@ -92,7 +92,12 @@ import os; os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 # img resolution
 img_resolution = 1024
-sam = sam_model_registry['vit_h'](checkpoint='ckpt/sam_vit_h_4b8939.pth', custom_img_size=img_resolution).cuda()
+
+# Select Proper SAM Size you want
+sam = sam_model_registry['vit_h'](checkpoint='ckpt/sam_vit_h_4b8939.pth', custom_img_size=img_resolution).cuda() # SAM ViT-H
+# sam = sam_model_registry['vit_l'](checkpoint='ckpt/sam_vit_l_0b3195.pth', custom_img_size=img_resolution).cuda() # SAM ViT-L
+# sam = sam_model_registry['vit_b'](checkpoint='ckpt/sam_vit_b_01ec64.pth', custom_img_size=img_resolution).cuda() # SAM ViT-B
+# sam = sam_model_registry['vit_t'](checkpoint='ckpt/mobile_sam.pt', custom_img_size=img_resolution).cuda() # Mobile-SAM
 
 # prompt
 from utils.amg import build_all_layer_point_grids
