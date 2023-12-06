@@ -21,10 +21,6 @@ def build_sam_vit_h(checkpoint=None, custom_img_size=1024):
         custom_img_size=custom_img_size, # by LBK EDIT
     )
 
-
-build_sam = build_sam_vit_h
-
-
 def build_sam_vit_l(checkpoint=None, custom_img_size=1024):
     return _build_sam(
         encoder_embed_dim=1024,

@@ -617,6 +617,4 @@ class TinyViT(nn.Module):
 
     def forward(self, x):
         x = self.forward_features(x)
-        #x = self.norm_head(x)
-        #x = self.head(x)
         return x
