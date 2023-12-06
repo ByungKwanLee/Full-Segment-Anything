@@ -32,6 +32,13 @@ Therefore, Full-Segment-Anything addresses the above issues:
 (Not did we re-train, but we modified in the code-level)
 
 ---
+## Version Update
+
+* Adding Mobile-SAM with flexible inputs (but the performance of Mobile-SAM is really dependent with the image resolution size)
+
+* By modifying (window partition & unpartiion) image encoding in Original SAM, the performance has been improved on the lower resolution: 256, 512
+
+---
 ## Visualization of Full-Segment-Anything
 
 <figure class="half1">
