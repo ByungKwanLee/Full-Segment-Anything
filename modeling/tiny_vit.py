@@ -132,10 +132,7 @@ class PatchMerging(nn.Module):
         self.conv3 = Conv2d_BN(out_dim, out_dim, 1, 1, 0)
 
     def forward(self, x):
-        if x.ndim == 3:
-            B = len(x)
-            x = x.view(B, int(math.sqrt(x.shape[1])), int(math.sqrt(x.shape[1])), -1).permute(0, 3, 1, 2)
-
+        if x.ndim == 3: x = x.view(len(x), int(math.sqrt(x.shape[1])), int(math.sqrt(x.shape[1])), -1).permute(0, 3, 1, 2)
         x = self.conv1(x)
         x = self.act(x)
 

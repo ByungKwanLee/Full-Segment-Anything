@@ -193,11 +193,16 @@ class Sam(nn.Module):
       """
       Configuration
       """
-      pred_iou_thresh = 0.85
-      stability_score_offset = 1.0
-      stability_score_thresh = 0.85
-      box_nms_thresh = 0.7
+      # pred_iou_thresh = 0.85
+      # stability_score_offset = 1.0
+      # stability_score_thresh = 0.85
+      # box_nms_thresh = 0.7
 
+
+      pred_iou_thresh = 0.7
+      stability_score_offset = 1.0
+      stability_score_thresh = 0.7
+      box_nms_thresh = 0.7
 
       # Interpolation
       if not is_low_resol:
