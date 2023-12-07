@@ -611,8 +611,7 @@ class TinyViT(nn.Module):
         for f in self.layers: x = f(x)
         B,L,C=x.size()
         x = x.view(B, int(math.sqrt(L)), int(math.sqrt(L)), C)
-        x=x.permute(0, 3, 1, 2)
-        x=self.neck(x)
+        x=self.neck(x.permute(0, 3, 1, 2))
         return x
 
     def forward(self, x):
